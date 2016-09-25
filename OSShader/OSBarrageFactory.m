@@ -266,7 +266,7 @@
         _displayViewSize = viewSize;
         // 初始化弹幕数组
         _barrageArray = [NSMutableArray array];
-        _cachaBarrageInfoArray = [NSMutableArray array];
+        _cachaBarrageInfoArray = [NSMutableArray arrayWithCapacity:100];
         _barragePathArray = [NSMutableArray array];
         
         
