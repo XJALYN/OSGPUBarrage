@@ -11,7 +11,7 @@
 #import <OpenGLES/ES2/glext.h>
 #import <OpenGLES/ES2/gl.h>
 /**
- *  次对象专门负责管理
+ *  对象专门负责管理
  */
 
 @interface OSShaderManager : NSObject
@@ -35,9 +35,6 @@
 
 /**
  *  验证程序是否成功
- *
- *  @param prog 程序标示
- *
  *  @return 返回是否成功标志
  */
 - (BOOL)validateProgram;

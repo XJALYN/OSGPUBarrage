@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F58C736D1D98E7D10009DED9 /* OSEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C736C1D98E7D10009DED9 /* OSEffect.m */; };
+		F58C73751D98EDFF0009DED9 /* Cos2Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F58C73711D98EDFF0009DED9 /* Cos2Shader.vsh */; };
+		F58C73761D98EDFF0009DED9 /* CosShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F58C73721D98EDFF0009DED9 /* CosShader.vsh */; };
+		F58C73771D98EDFF0009DED9 /* Sin2Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F58C73731D98EDFF0009DED9 /* Sin2Shader.vsh */; };
+		F58C73781D98EDFF0009DED9 /* SinShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F58C73741D98EDFF0009DED9 /* SinShader.vsh */; };
+		F58C737A1D98F9FA0009DED9 /* SinCosXShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F58C73791D98F9FA0009DED9 /* SinCosXShader.vsh */; };
+		F58C737C1D98FA650009DED9 /* Sin2xShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F58C737B1D98FA650009DED9 /* Sin2xShader.vsh */; };
+		F58C737E1D98FB330009DED9 /* SinCon2XShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F58C737D1D98FB330009DED9 /* SinCon2XShader.vsh */; };
+		F58C73801D98FCB90009DED9 /* XYShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F58C737F1D98FCB90009DED9 /* XYShader.vsh */; };
+		F58C73821D98FCE30009DED9 /* YXShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F58C73811D98FCE30009DED9 /* YXShader.vsh */; };
+		F58C73841D9915590009DED9 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = F58C73831D9915590009DED9 /* 1.png */; };
+		F58C73861D9916420009DED9 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = F58C73851D9916420009DED9 /* 2.png */; };
 		F5F5C0811D965C56004070D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F5C0801D965C56004070D6 /* main.m */; };
 		F5F5C0841D965C56004070D6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F5C0831D965C56004070D6 /* AppDelegate.m */; };
 		F5F5C0871D965C56004070D6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F5C0861D965C56004070D6 /* ViewController.m */; };
@@ -26,6 +38,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F58C736B1D98E7D10009DED9 /* OSEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSEffect.h; sourceTree = "<group>"; };
+		F58C736C1D98E7D10009DED9 /* OSEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSEffect.m; sourceTree = "<group>"; };
+		F58C73711D98EDFF0009DED9 /* Cos2Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Cos2Shader.vsh; sourceTree = "<group>"; };
+		F58C73721D98EDFF0009DED9 /* CosShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CosShader.vsh; sourceTree = "<group>"; };
+		F58C73731D98EDFF0009DED9 /* Sin2Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Sin2Shader.vsh; sourceTree = "<group>"; };
+		F58C73741D98EDFF0009DED9 /* SinShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SinShader.vsh; sourceTree = "<group>"; };
+		F58C73791D98F9FA0009DED9 /* SinCosXShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SinCosXShader.vsh; sourceTree = "<group>"; };
+		F58C737B1D98FA650009DED9 /* Sin2xShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Sin2xShader.vsh; sourceTree = "<group>"; };
+		F58C737D1D98FB330009DED9 /* SinCon2XShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SinCon2XShader.vsh; sourceTree = "<group>"; };
+		F58C737F1D98FCB90009DED9 /* XYShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = XYShader.vsh; sourceTree = "<group>"; };
+		F58C73811D98FCE30009DED9 /* YXShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = YXShader.vsh; sourceTree = "<group>"; };
+		F58C73831D9915590009DED9 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		F58C73851D9916420009DED9 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		F5F5C07C1D965C56004070D6 /* OSGPUBarrage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSGPUBarrage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5F5C0801D965C56004070D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F5F5C0821D965C56004070D6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -113,8 +138,19 @@
 		F5F5C0961D965C6D004070D6 /* OSShader */ = {
 			isa = PBXGroup;
 			children = (
+				F58C73831D9915590009DED9 /* 1.png */,
+				F58C73851D9916420009DED9 /* 2.png */,
 				F5F5C0AF1D965CD4004070D6 /* Shader.fsh */,
 				F5F5C0B01D965CD4004070D6 /* Shader.vsh */,
+				F58C73811D98FCE30009DED9 /* YXShader.vsh */,
+				F58C737F1D98FCB90009DED9 /* XYShader.vsh */,
+				F58C737D1D98FB330009DED9 /* SinCon2XShader.vsh */,
+				F58C73791D98F9FA0009DED9 /* SinCosXShader.vsh */,
+				F58C73711D98EDFF0009DED9 /* Cos2Shader.vsh */,
+				F58C73721D98EDFF0009DED9 /* CosShader.vsh */,
+				F58C73731D98EDFF0009DED9 /* Sin2Shader.vsh */,
+				F58C73741D98EDFF0009DED9 /* SinShader.vsh */,
+				F58C737B1D98FA650009DED9 /* Sin2xShader.vsh */,
 				F5F5C0AC1D965CCE004070D6 /* OSDisplayerController.h */,
 				F5F5C0AD1D965CCE004070D6 /* OSDisplayerController.m */,
 				F5F5C0971D965C6D004070D6 /* OSBarrage.h */,
@@ -131,6 +167,8 @@
 				F5F5C0A21D965C6D004070D6 /* OSTextBarrage.m */,
 				F5F5C0A31D965C6D004070D6 /* UIImage+OSBarrage.h */,
 				F5F5C0A41D965C6D004070D6 /* UIImage+OSBarrage.m */,
+				F58C736B1D98E7D10009DED9 /* OSEffect.h */,
+				F58C736C1D98E7D10009DED9 /* OSEffect.m */,
 			);
 			path = OSShader;
 			sourceTree = "<group>";
@@ -194,11 +232,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F58C73801D98FCB90009DED9 /* XYShader.vsh in Resources */,
+				F58C73771D98EDFF0009DED9 /* Sin2Shader.vsh in Resources */,
 				F5F5C0B11D965CD4004070D6 /* Shader.fsh in Resources */,
 				F5F5C08F1D965C56004070D6 /* LaunchScreen.storyboard in Resources */,
+				F58C73761D98EDFF0009DED9 /* CosShader.vsh in Resources */,
+				F58C737A1D98F9FA0009DED9 /* SinCosXShader.vsh in Resources */,
+				F58C73781D98EDFF0009DED9 /* SinShader.vsh in Resources */,
+				F58C73821D98FCE30009DED9 /* YXShader.vsh in Resources */,
 				F5F5C08C1D965C56004070D6 /* Assets.xcassets in Resources */,
+				F58C73841D9915590009DED9 /* 1.png in Resources */,
+				F58C73861D9916420009DED9 /* 2.png in Resources */,
+				F58C737C1D98FA650009DED9 /* Sin2xShader.vsh in Resources */,
+				F58C737E1D98FB330009DED9 /* SinCon2XShader.vsh in Resources */,
 				F5F5C08A1D965C56004070D6 /* Main.storyboard in Resources */,
 				F5F5C0B21D965CD4004070D6 /* Shader.vsh in Resources */,
+				F58C73751D98EDFF0009DED9 /* Cos2Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +269,7 @@
 				F5F5C0A71D965C6D004070D6 /* OSBarrageInfo.m in Sources */,
 				F5F5C0811D965C56004070D6 /* main.m in Sources */,
 				F5F5C0A81D965C6D004070D6 /* OSImageBarrage.m in Sources */,
+				F58C736D1D98E7D10009DED9 /* OSEffect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +426,7 @@
 				F5F5C0951D965C56004070D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

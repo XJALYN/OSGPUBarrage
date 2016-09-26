@@ -13,9 +13,9 @@
 #import <OpenGLES/ES1/glext.h>
 #import <GLKit/GLKit.h>
 #import "OSShaderManager.h"
-#import "OSBarrageFactory.h"
 #import "OSTextBarrage.h"
 #import "OSBarrageInfo.h"
+
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 #define FramesPerSecond 60
@@ -47,7 +47,8 @@ static const GLfloat coords[8] = {
 @property(nonatomic,strong)NSMutableArray  *textArray;
 @property(nonatomic,assign)BOOL textChange;
 @property(nonatomic,strong)OSShaderManager *shaderManager;
-@property(nonatomic,strong)OSBarrageFactory *barrageFactory;
+@property(nonatomic,strong)OSEffect *effect;
+
 @end
 
 
@@ -73,13 +74,16 @@ static const GLfloat coords[8] = {
 -(instancetype)init{
     if (self = [super init]){
          [self configure];
+        
     }
     return self;
 }
 
+
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
     if (self = [super initWithCoder:aDecoder]){
         [self configure];
+      
     }
     return self;
 }
@@ -87,6 +91,7 @@ static const GLfloat coords[8] = {
 -(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]){
         [self configure];
+        
     }
     return self;
 }
@@ -96,7 +101,7 @@ static const GLfloat coords[8] = {
     
     [super viewDidLoad];
     // 初始化
-    [self setupGL];
+    
     
     
 }
@@ -124,7 +129,9 @@ static const GLfloat coords[8] = {
 #pragma mark -
 #pragma mark - 初始化弹幕厂
 //-----------------------------------------------------------
--(void)setupBarrageFactory{
+-(void)setupBarrageFactoryWithEffectType:(OSEffectType)effectType{
+    self.effect = [OSEffect effectWithType:effectType];
+     [self setupGL];
     self.barrageFactory = [OSBarrageFactory barrageFactoryWithBarrageMaxHeight:self.maxBarrageHeight DisplayViewSize:self.disPlayViewSize];
     self.barrageFactory.cachaMaxCount = self.maxCachaBarrage; // 设置最大缓存
 
@@ -133,6 +140,18 @@ static const GLfloat coords[8] = {
    
     
 }
+
+-(void)setMaxCachaBarrage:(NSUInteger)maxCachaBarrage{
+    _maxCachaBarrage = maxCachaBarrage;
+    if (self.barrageFactory){
+        self.barrageFactory.cachaMaxCount = maxCachaBarrage;
+    }
+}
+
+//-----------------------------------------------------------
+#pragma mark -
+#pragma mark - 添加弹幕到弹幕工厂
+//-----------------------------------------------------------
 -(void)addBarrageInfo:(OSBarrageInfo*)barrageInfo{
      [self.barrageFactory addBarrageInfo:barrageInfo];
 }
@@ -191,7 +210,11 @@ static const GLfloat coords[8] = {
     // 设置上下文
     [EAGLContext setCurrentContext:self.context];
     // 导入着色器程序
-    [self createShaderProgramVertexShaderName:@"Shader" FragmentShaderName:@"Shader"];
+    if (!self.effect){
+        
+        self.effect = [OSEffect effectWithType:OSEffectNo];
+    }
+    [self createShaderProgramVertexShaderName:self.effect.vertexShaderName FragmentShaderName:self.effect.fragmentShaderName];
     
     
     // 启用着色器
@@ -204,10 +227,9 @@ static const GLfloat coords[8] = {
     glUniform1i(_textureBuffer, 0); // 0 代表GL_TEXTURE0
 
 //    // 启动深度测试
-//    glEnable(GL_DEPTH_TEST);
-//    GLuint vertextArray;
-//    glGenVertexArraysOES(1, &vertextArray);
-//    glBindVertexArrayOES(vertextArray);
+    glEnable(GL_DEPTH_TEST);
+    glFrustumf(1.0, 1.0, 1.0, 1.0, 0.1, 30.0);
+
     
     
     // 绑定纹理坐标
@@ -283,19 +305,21 @@ static const GLfloat coords[8] = {
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    
-    // 清屏
+    // 渲染弹幕
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    // 渲染弹幕
-     @synchronized (self.barrageFactory.barrageArray) {
-    [self.barrageFactory.barrageArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        OSBarrageInfo *barrageInfo = obj;
-        [barrageInfo drawToGPU];
-    }];
+    @synchronized (self.barrageFactory.barrageArray) {
+        [self.barrageFactory.barrageArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            OSBarrageInfo *barrageInfo = obj;
+            [barrageInfo drawToGPU];
+            if (barrageInfo.isDelete){
+                barrageInfo.canDelete = true;
+                [barrageInfo deleteVertexAndTextureFromGPU];
+            }
+            
+        }];
     }
 }
-
 
 - (BOOL)prefersStatusBarHidden {
     return YES;

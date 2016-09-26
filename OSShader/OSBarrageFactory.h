@@ -26,8 +26,8 @@ typedef enum : NSUInteger {
 } OSErrorType;
 
 @interface OSBarrageFactory : NSObject
-@property(nonatomic,strong)NSMutableArray *barragePathArray;  // 弹道数组,弹道中放的是弹幕
-@property(nonatomic,strong)NSMutableArray *barrageArray;
+@property(atomic,strong)NSMutableArray *barragePathArray;  // 弹道数组,弹道中放的是弹幕
+@property(atomic,strong)NSMutableArray *barrageArray;
 @property(nonatomic,assign)NSInteger displayMaxCount;         // 显示弹幕的最大数量 如果不设置,默认为满屏
 @property(nonatomic,assign)NSInteger cachaMaxCount;           // 缓冲区弹幕的数量
 @property(nonatomic,assign)OSSortType  sortType;              // 排序类型

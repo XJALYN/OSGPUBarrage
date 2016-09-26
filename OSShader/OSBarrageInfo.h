@@ -55,7 +55,9 @@ typedef enum : NSUInteger {
 @property(nonatomic,assign)NSTimeInterval timeStamp;
 @property(nonatomic,assign,readonly)OSBarrageType type;
 @property(nonatomic,strong)OSBarrage *barrage;
-@property(nonatomic,assign)NSInteger rate;        // 弹幕速度 1-5 默认为1 
+@property(nonatomic,assign)NSInteger rate;        // 弹幕速度 1-5 默认为1
+@property(nonatomic,assign)BOOL isDelete;
+@property(nonatomic,assign)BOOL canDelete;
 
 
 

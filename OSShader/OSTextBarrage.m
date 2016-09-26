@@ -29,12 +29,16 @@
         self.data = [self.image getRGBABuffer];
         self.width = self.image.size.width;
         self.height = self.image.size.height;
+        
         [self createVerticeArray]; // 必须初始化的，因为我用的是指针的方式
         
         
     }
     return self;
 }
+
+
+
 
 
 

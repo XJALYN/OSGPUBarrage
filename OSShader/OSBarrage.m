@@ -11,12 +11,18 @@
 
 @implementation OSBarrage
 
+//-----------------------------------------------------------
+#pragma mark -
+#pragma mark - 释放内存
+//-----------------------------------------------------------
 -(void)dealloc{
     if(self.vertexArray){
         free(self.vertexArray);
+        self.vertexArray = 0;
     }
     if (self.data){
         free(self.data);
+        self.data = 0;
     }
 }
 //-----------------------------------------------------------
