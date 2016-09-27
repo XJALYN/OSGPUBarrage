@@ -16,7 +16,6 @@
     switch (effectType) {
         case OSEffectSin:
             effect.vertexShaderName = @"SinShader";
-
             break;
         case OSEffectSin2:
             effect.vertexShaderName = @"Sin2Shader";
@@ -27,8 +26,22 @@
         case OSEffectCos2:
             effect.vertexShaderName = @"Cos2Shader";
             break;
+        case OSEffectXY:
+            effect.vertexShaderName = @"XYShader";
+            break;
+        case OSEffectYX:
+            effect.vertexShaderName = @"YXShader";
+            break;
+        case OSEffectSin2X:
+            effect.vertexShaderName = @"Sin2xShader";
+            break;
+        case OSEffectSinCosX:
+            effect.vertexShaderName = @"SinCosXShader";
+            break;
+        case OSEffectSinCon2X:
+            effect.vertexShaderName = @"SinCon2XShader";
+            break;
         default:
-           
             break;
     }
     return effect;

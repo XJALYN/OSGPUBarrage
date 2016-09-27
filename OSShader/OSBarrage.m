@@ -33,6 +33,7 @@
     CGFloat maxWidth = self.displayWidth;
     CGFloat maxHeight = self.displayHeight;
     self.vertexArray = (GLfloat*)(malloc(sizeof(GLfloat)*12));
+    memset(_vertexArray, 0,sizeof(GLfloat)*12);
     
     *_vertexArray = -1 + _position.x / maxWidth*2;
     *(_vertexArray+1)= 1 - _position.y / maxHeight*2;

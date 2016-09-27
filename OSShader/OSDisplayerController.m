@@ -39,7 +39,7 @@ static const GLfloat coords[8] = {
     GLuint _coordBuffer;
     GLuint _texImageBuffer;
     GLuint _textureBuffer;
-
+    
     
 }
 @property(nonatomic,strong)UIImageView *imageView;
@@ -57,7 +57,7 @@ static const GLfloat coords[8] = {
 
 
 -(NSMutableArray *)textArray{
-   
+    
     if(!_textArray){
         _textArray = [NSMutableArray array];
         return _textArray;
@@ -73,7 +73,7 @@ static const GLfloat coords[8] = {
 
 -(instancetype)init{
     if (self = [super init]){
-         [self configure];
+        [self configure];
         
     }
     return self;
@@ -83,7 +83,7 @@ static const GLfloat coords[8] = {
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
     if (self = [super initWithCoder:aDecoder]){
         [self configure];
-      
+        
     }
     return self;
 }
@@ -131,13 +131,13 @@ static const GLfloat coords[8] = {
 //-----------------------------------------------------------
 -(void)setupBarrageFactoryWithEffectType:(OSEffectType)effectType{
     self.effect = [OSEffect effectWithType:effectType];
-     [self setupGL];
+    [self setupGL];
     self.barrageFactory = [OSBarrageFactory barrageFactoryWithBarrageMaxHeight:self.maxBarrageHeight DisplayViewSize:self.disPlayViewSize];
     self.barrageFactory.cachaMaxCount = self.maxCachaBarrage; // 设置最大缓存
-
+    
     // 重新调整弹幕的大小
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.disPlayViewSize.width, self.disPlayViewSize.height);
-   
+    
     
 }
 
@@ -153,7 +153,7 @@ static const GLfloat coords[8] = {
 #pragma mark - 添加弹幕到弹幕工厂
 //-----------------------------------------------------------
 -(void)addBarrageInfo:(OSBarrageInfo*)barrageInfo{
-     [self.barrageFactory addBarrageInfo:barrageInfo];
+    [self.barrageFactory addBarrageInfo:barrageInfo];
 }
 
 
@@ -164,7 +164,7 @@ static const GLfloat coords[8] = {
 #pragma mark - 释放资源
 //-----------------------------------------------------------
 - (void)dealloc
-{    
+{
     [self tearDownGL];
     
     if ([EAGLContext currentContext] == self.context) {
@@ -198,7 +198,7 @@ static const GLfloat coords[8] = {
 
 - (void)setupGL
 {
-   
+    
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     if (!self.context) {
         NSLog(@"Failed to create ES context");
@@ -225,11 +225,11 @@ static const GLfloat coords[8] = {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     glUniform1i(_textureBuffer, 0); // 0 代表GL_TEXTURE0
-
-//    // 启动深度测试
+    
+    //    // 启动深度测试
     glEnable(GL_DEPTH_TEST);
     glFrustumf(1.0, 1.0, 1.0, 1.0, 0.1, 30.0);
-
+    
     
     
     // 绑定纹理坐标
@@ -244,7 +244,7 @@ static const GLfloat coords[8] = {
     self.disPlayViewSize = self.view.frame.size;
     self.maxCachaBarrage = 100;
     self.collisionEnable = true;
-  
+    
 }
 
 
@@ -272,11 +272,11 @@ static const GLfloat coords[8] = {
         [self.shaderManager deleteShader:&fragmentShader];
     }
     _texImageBuffer = glGetUniformLocation(_program, "texture1");
-  
+    
     [self.shaderManager detachAndDeleteShader:&vertexShader];
     [self.shaderManager detachAndDeleteShader:&fragmentShader];
     
-   
+    
 }
 
 

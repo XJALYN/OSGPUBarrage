@@ -29,7 +29,7 @@
     //self.displayVC.disPlayViewSize = CGSizeMake(100, 200);
     
     // 3.初始化弹幕工厂
-    [self.displayVC setupBarrageFactoryWithEffectType:OSEffectCos];
+    [self.displayVC setupBarrageFactoryWithEffectType:OSEffectSin2X];
     
     // 4.设置缓存弹幕的数量
     self.displayVC.maxCachaBarrage = 500;
@@ -37,7 +37,7 @@
     // 5.开启碰撞检测
     self.displayVC.collisionEnable = true;
     
-    [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(generateText:) userInfo:nil repeats:true];
+    [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(generateText:) userInfo:nil repeats:true];
     
     
     
@@ -55,13 +55,10 @@
 -(void)generateText:(NSTimer*)timer{
     
     UIColor *color = [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
-//    if (self.displayVC.barrageFactory.barrageArray.count > 50){
-//        //[timer invalidate];
-//    }
-    //NSLog(@"%ld",self.displayVC.barrageFactory.barrageArray.count);
+
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        OSBarrageInfo *barrageInfo = [OSBarrageInfo barrageInfoWithString:@"弹" font:[UIFont systemFontOfSize:arc4random_uniform(15)+15] color:color];
-        barrageInfo.rate = arc4random_uniform(4)+2;
+        OSBarrageInfo *barrageInfo = [OSBarrageInfo barrageInfoWithString:@"弹幕" font:[UIFont systemFontOfSize:30] color:color];
+        barrageInfo.rate = arc4random_uniform(5)+1;
         [self.self.displayVC addBarrageInfo:barrageInfo];
     });
   

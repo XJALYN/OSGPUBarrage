@@ -14,7 +14,8 @@ varying  vec2 texCoordVarying;
 
 void main()
 {
-   
+    
+//    float y = position.y + 0.1*sin(position.x);
     texCoordVarying = texCoord0;
     gl_Position = vec4(position.x,position.y,position.z,1);
 }

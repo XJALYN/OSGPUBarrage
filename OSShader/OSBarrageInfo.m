@@ -10,6 +10,8 @@
 static GLubyte indices[4] = {
     0,2,1,3
 };
+static GLuint textureBuffer;
+static GLuint vertexBuffer;
 @interface OSBarrageInfo()
 @property(nonatomic,assign)GLuint vertexBuffer; // 顶点内存buffer
 @property(nonatomic,assign)GLuint textureBuffer; // 纹理缓冲区
@@ -65,28 +67,34 @@ static GLubyte indices[4] = {
     
 }
 
+
 //-----------------------------------------------------------
 #pragma mark -
 #pragma mark - 导入顶点坐标和问题到GPU
 //-----------------------------------------------------------
-
 -(void)loadVertexAndTextureToGPU{
-    if (!_vertexBuffer){
-      
 
-        glGenBuffers(1, &(_vertexBuffer)); // 申请内存标识
-        glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer); // 指定这个内存标识为顶点缓冲区
+    if (!vertexBuffer){
+        glGenBuffers(1, &(vertexBuffer)); // 申请内存标识
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer); // 指定这个内存标识为顶点缓冲区
+    }
+    
+    
+    if (!_textureBuffer){
+      
  
-        glEnableVertexAttribArray(GLKVertexAttribPosition);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
         glVertexAttribPointer(GLKVertexAttribPosition , 3, GL_FLOAT, NO, sizeof(GLfloat)*3, self.barrage. vertexArray);
-       
-     
+
+        glEnableVertexAttribArray(GLKVertexAttribPosition);
 
         
         // 加载纹理
-        glActiveTexture(GL_TEXTURE0);
+        glActiveTexture(GL_ACTIVE_TEXTURE);
         // 给着色器指定纹理内存区域
         glGenTextures(1, &(_textureBuffer));
+        glBindTexture(GL_TEXTURE_2D, textureBuffer);
+       
         glBindTexture(GL_TEXTURE_2D, _textureBuffer);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -94,18 +102,19 @@ static GLubyte indices[4] = {
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,  self.barrage.width, self.barrage.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, self.barrage.data);
        
+       
  
         
     }else{
-          glBindVertexArrayOES(_vertexArrayBuffer);
-       
-        glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer); // 绑定内存
-    
+
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
         glVertexAttribPointer(GLKVertexAttribPosition , 3, GL_FLOAT, NO, sizeof(GLfloat)*3, self.barrage.vertexArray);
         glEnableVertexAttribArray(GLKVertexAttribPosition);
-        
-        glActiveTexture(GL_TEXTURE0);
+
+        glActiveTexture(GL_ACTIVE_TEXTURE);
         glBindTexture(GL_TEXTURE_2D, _textureBuffer);
+      
+
         
     }
 
@@ -118,16 +127,18 @@ static GLubyte indices[4] = {
 #pragma mark - 从GPU 中释放内存和纹理坐标
 //-----------------------------------------------------------
 -(void)deleteVertexAndTextureFromGPU{
-     
-
+    static  int i = 0;
+    i++;
+    NSLog(@"%d",i);
         if (self.vertexBuffer){
             glDeleteBuffers(1, &(_vertexBuffer));
             self.vertexBuffer = 0;
-            
+
         }
         if(self.textureBuffer){
             glDeleteTextures(1, &_textureBuffer);
             _textureBuffer = 0;
+          
         }
 
 }
@@ -140,26 +151,15 @@ static GLubyte indices[4] = {
     [self loadVertexAndTextureToGPU];
     glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, indices);
     
-  
-
-    
 }
-
-
 
 //-----------------------------------------------------------
 #pragma mark -
-#pragma mark - 对象销魂时，释放掉内存
+#pragma mark - 清除工作
 //-----------------------------------------------------------
-//
-//-(void)dealloc{
-//    
-//
-//    [self deleteVertexAndTextureFromGPU];
-//
-//    
-//}
-
+-(void)dealloc{
+    [self deleteVertexAndTextureFromGPU];
+}
 
 
 @end

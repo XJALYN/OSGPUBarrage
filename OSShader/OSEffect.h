@@ -13,7 +13,13 @@ typedef enum : NSUInteger {
     OSEffectSin,
     OSEffectCos,
     OSEffectSin2,
-    OSEffectCos2
+    OSEffectCos2,
+    OSEffectXY,
+    OSEffectYX,
+    OSEffectSin2X,
+    OSEffectSinCon2X,
+    OSEffectSinCosX
+    
     
 } OSEffectType;
 

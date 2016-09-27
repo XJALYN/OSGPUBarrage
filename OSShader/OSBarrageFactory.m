@@ -34,78 +34,37 @@
     barrageInfo.barrage.displayWidth = self.displayViewSize.width;
     barrageInfo.barrage.displayHeight = self.displayViewSize.height;
     
-   __block BOOL isSuccess = false;
+    __block BOOL isSuccess = false;
     /*给self.barragePathArray - 加锁*/
-  
-       
-            /*barrageInfo-Begin*/
-            if (barrageInfo){
-               
-                [self.barragePathArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    NSMutableArray *path = obj;
-                    // 如果缓冲中有弹幕,则做相应的添加弹幕逻辑处理操作
-                    // 计算弹幕的初始位置
-                    if (path.count == 0){
-                        // 如果弹道中没有弹幕,直接向里面添加
-                        barrageInfo.barrage.position = GLKVector3Make(self.displayViewSize.width, self.barrageMaxHeight*idx, 0);
-                        [path addObject:barrageInfo];
-                        @synchronized (self.barragePathArray) {
-                            [self.barrageArray addObject:barrageInfo];
-                        }
-                        isSuccess = true;
-                        
-                        *stop = true;
-                       
-                        
-                        
-                    }else{
-                        // 如果弹道里面有弹幕,先检测最后一个弹幕是不是在视图外边,如果在外边则不添加
-                            OSBarrageInfo *lastBarrageInfo = path.lastObject;
-                            if (lastBarrageInfo .barrage.position.x + lastBarrageInfo .barrage.width < self.displayViewSize.width-10){
-                                barrageInfo.barrage.position = GLKVector3Make(self.displayViewSize.width, self.barrageMaxHeight*idx, 0);
-                                [path addObject:barrageInfo];
-                               
-                                @synchronized (self.barragePathArray) {
-                                 [self.barrageArray addObject:barrageInfo];
-                                }
-                                 isSuccess = true;
-                               
-                           
-                            *stop = true;
-                            
-                        }
-                        
-                    }
-                        
-                }];
-            }
+    
+    @synchronized (self.barragePathArray) {
         
-        /*barrageInfo-End*/
-
+    }
+       /*barrageInfo-End*/
+    
     
     
     if (isSuccess){
-         return OSSuccess;
+        return OSSuccess;
     }
-
+    
     if (self.cachaBarrageInfoArray.count >= self.cachaMaxCount){
         return OSCachaFill;
     }else{
-            // 添加弹幕放在异步   // 加锁 其他线程也会用到
+        // 添加弹幕放在异步   // 加锁 其他线程也会用到
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             @synchronized (self.cachaBarrageInfoArray) {
-                     [self.cachaBarrageInfoArray addObject:barrageInfo];
-                NSLog(@"%ld",self.cachaBarrageInfoArray.count);
+                [self.cachaBarrageInfoArray addObject:barrageInfo];
+                NSLog(@"缓存%ld",self.cachaBarrageInfoArray.count);
             }
-  
-            });
-
-            return OSSuccess;
-        }
-
-   
+        });
+        
+        return OSSuccess;
+    }
     
-  
+    
+    
+    
 }
 
 
@@ -117,9 +76,9 @@
 - (void)getBarrageFromCacha:(NSTimer*)timer{
     
     // 从缓冲区中取回弹幕
-
     
- 
+    
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         OSBarrageInfo *barrageInfo;
         /*给self.cachaBarrageInfoArray 加锁*/
@@ -131,58 +90,58 @@
             // 如果缓冲从有弹幕再去遍历找到合适的位置
         }
         /*给self.cachaBarrageInfoArray 加锁*/
-            /*给self.barragePathArray - 加锁*/
-            @synchronized (self.barragePathArray) {
-                
-                /*barrageInfo-Begin*/
-                if (barrageInfo){
-                    [self.barragePathArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        NSMutableArray *path = obj;
-                        // 如果缓冲中有弹幕,则做相应的添加弹幕逻辑处理操作
-                        // 计算弹幕的初始位置
-                        if (path.count == 0){
-                            // 如果弹道中没有弹幕,直接忘里面添加
+        /*给self.barragePathArray - 加锁*/
+        @synchronized (self.barragePathArray) {
+            
+            /*barrageInfo-Begin*/
+            if (barrageInfo){
+                [self.barragePathArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    NSMutableArray *path = obj;
+                    // 如果缓冲中有弹幕,则做相应的添加弹幕逻辑处理操作
+                    // 计算弹幕的初始位置
+                    if (path.count == 0){
+                        // 如果弹道中没有弹幕,直接忘里面添加
+                        barrageInfo.barrage.position = GLKVector3Make(self.displayViewSize.width, self.barrageMaxHeight*idx, 0);
+                        [path addObject:barrageInfo];
+                        
+                        @synchronized (self.barrageArray) {
+                            [self.barrageArray addObject:barrageInfo];
+                        }
+                        @synchronized (self.cachaBarrageInfoArray) {
+                            [self.cachaBarrageInfoArray removeObjectAtIndex:0];
+                        }
+                        
+                        *stop = true;
+                    }else{
+                        // 如果弹道里面有弹幕,先检测最后一个弹幕是不是在视图外边,如果在外边则不添加
+                        OSBarrageInfo *lastBarrageInfo = path.lastObject;
+                        if (lastBarrageInfo && lastBarrageInfo .barrage.position.x + lastBarrageInfo .barrage.width < self.displayViewSize.width-10){
                             barrageInfo.barrage.position = GLKVector3Make(self.displayViewSize.width, self.barrageMaxHeight*idx, 0);
                             [path addObject:barrageInfo];
-
+                            
                             @synchronized (self.barrageArray) {
-                                 [self.barrageArray addObject:barrageInfo];
+                                [self.barrageArray addObject:barrageInfo];
                             }
+                            
                             @synchronized (self.cachaBarrageInfoArray) {
-                                [self.cachaBarrageInfoArray removeObjectAtIndex:0];
+                                [self.cachaBarrageInfoArray  removeObjectAtIndex:0];
                             }
-
+                            
+                            
                             *stop = true;
-                        }else{
-                            // 如果弹道里面有弹幕,先检测最后一个弹幕是不是在视图外边,如果在外边则不添加
-                            OSBarrageInfo *lastBarrageInfo = path.lastObject;
-                            if (lastBarrageInfo && lastBarrageInfo .barrage.position.x + lastBarrageInfo .barrage.width < self.displayViewSize.width-10){
-                                barrageInfo.barrage.position = GLKVector3Make(self.displayViewSize.width, self.barrageMaxHeight*idx, 0);
-                                [path addObject:barrageInfo];
-
-                                @synchronized (self.barrageArray) {
-                                     [self.barrageArray addObject:barrageInfo];
-                                }
-
-                                @synchronized (self.cachaBarrageInfoArray) {
-                                    [self.cachaBarrageInfoArray removeObjectAtIndex:0];
-                                }
-                                
-                              
-                                *stop = true;
-                                
-                            }
+                            
                         }
-                    }];
-                }
-                }
-                /*barrageInfo-End*/
+                    }
+                }];
+            }
+        }
+        /*barrageInfo-End*/
         /*给self.barragePathArray - 加锁*/
-            
-      
+        
+        
     });
-   
-  
+    
+    
     
 }
 
@@ -197,69 +156,56 @@
     if (rate >= 6){
         rate = 1;
     }
-    if (self.barrageArray.count == 0 ){
-        NSLog(@"%@",self.cachaBarrageInfoArray);
-        NSLog(@"%@",self.barragePathArray);
-    }
+
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        
-   
-   // @synchronized (self.barragePathArray) {
-    /*self.barragePathArray-Begin*/
-    // 便利一遍弹幕,看有没有出界的弹幕 并且调整弹幕的位置
-     
-       
-    
-            [self.barragePathArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSMutableArray *path = obj;
-                [path  enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx1, BOOL * _Nonnull stop) {
-            // 检测有没有弹幕出界
-                    OSBarrageInfo *barrageInfo = obj;
-            // 开启碰撞检测 获取上一个弹幕,如果距离小于5，则后一个弹幕的速度和前一个相同
-                    if (self.collisionEnable){
-                        if (idx1  >0){
-                            OSBarrageInfo *lastBarrageInfo = path[idx1-1];
-                            if (lastBarrageInfo && barrageInfo && lastBarrageInfo.barrage.position.x + lastBarrageInfo.barrage.width > barrageInfo.barrage.position.x - 10){
-                                barrageInfo.rate = lastBarrageInfo.rate;
-                            }
-                        }
-                    }
-            
-            
-            // 根据弹幕的不同速度,设置其偏移量
-                    if (barrageInfo && barrageInfo.rate >= rate ){
-                        barrageInfo.barrage.position = GLKVector3Make(barrageInfo.barrage.position.x-0.5, barrageInfo.barrage.position.y, 0.5-idx1/1000.0);
-                
-                    }
-            
-            // 将移除屏幕的弹幕移除掉
-                    if ( barrageInfo && barrageInfo.barrage.position.x + barrageInfo.barrage.width < 0 ){
-                        @synchronized (self.barrageArray) {
-                          
-                            if (barrageInfo.canDelete){
-                                [self.barrageArray removeObject:barrageInfo];
-                                [path removeObject:barrageInfo];
-                            }
-                            
-                            barrageInfo.isDelete = true;
-                           
-                            
-                           
-                            
-                        }
-                       
-                        *stop = true;
 
+         @synchronized (self.barragePathArray) {
+        /*self.barragePathArray-Begin*/
+        // 便利一遍弹幕,看有没有出界的弹幕 并且调整弹幕的位置
+        [self.barragePathArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSMutableArray *path = obj;
+            [path  enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx1, BOOL * _Nonnull stop) {
+                // 检测有没有弹幕出界
+                OSBarrageInfo *barrageInfo = obj;
+                // 开启碰撞检测 获取上一个弹幕,如果距离小于5，则后一个弹幕的速度和前一个相同
+                if (self.collisionEnable){
+                    if (idx1  >0){
+                        OSBarrageInfo *lastBarrageInfo = path[idx1-1];
+                        if (lastBarrageInfo && barrageInfo && lastBarrageInfo.barrage.position.x + lastBarrageInfo.barrage.width > barrageInfo.barrage.position.x - 10){
+                            barrageInfo.rate = lastBarrageInfo.rate;
+                        }
                     }
-            
-                }];
+                }
+                
+                
+                // 根据弹幕的不同速度,设置其偏移量
+                if (barrageInfo && barrageInfo.rate >= rate ){
+                    barrageInfo.barrage.position = GLKVector3Make(barrageInfo.barrage.position.x-1, barrageInfo.barrage.position.y, 0.5-idx1/1000.0);
+                    
+                }
+                
+                // 将移除屏幕的弹幕移除掉
+                if ( barrageInfo && barrageInfo.barrage.position.x + barrageInfo.barrage.width < 0 ){
+                    @synchronized (self.barrageArray) {
+                        if (barrageInfo.canDelete){
+                            [self.barrageArray removeObject:barrageInfo];
+                            [path removeObject:barrageInfo];
+                        }
+                        barrageInfo.isDelete = true;
+                    }
+                    
+                    *stop = true;
+                    
+                }
+                
             }];
-            
-       
-    
-    /*self.barragePathArray-Begin*/
-   // }
+        }];
+        
+        
+        
+        /*self.barragePathArray-Begin*/
+         }
     });
     
 }
@@ -281,9 +227,9 @@
 //-----------------------------------------------------------
 -(void)clearAllBarrageInDisplay{
     @synchronized (self.barragePathArray) {
-         [self.barragePathArray removeAllObjects];
+        [self.barragePathArray removeAllObjects];
     };
-   
+    
 }
 
 //-----------------------------------------------------------
@@ -313,11 +259,8 @@
         
         // 创建弹幕路径
         [self createBarragePaths];
-          self.timer1 = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(getBarrageFromCacha:) userInfo:nil repeats:true];
-         self.timer2 = [NSTimer scheduledTimerWithTimeInterval:0.002 target:self selector:@selector(caluateBarragePosition:) userInfo:nil repeats:true];
-        
-        
-        
+        self.timer1 = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(getBarrageFromCacha:) userInfo:nil repeats:true];
+        self.timer2 = [NSTimer scheduledTimerWithTimeInterval:0.005 target:self selector:@selector(caluateBarragePosition:) userInfo:nil repeats:true];
         
     }
     return self;
@@ -328,7 +271,7 @@
 #pragma mark - 动态生成弹道数组
 //-----------------------------------------------------------
 -(void)createBarragePaths{
-   
+    
     // 计算弹道数量
     self.paths = (NSUInteger)self.displayViewSize.height/self.barrageMaxHeight;
     
