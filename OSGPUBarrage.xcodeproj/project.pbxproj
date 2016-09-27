@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F50D3F781D9A900C00E12FF1 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = F50D3F771D9A900C00E12FF1 /* image.png */; };
+		F55B54141D9A6B6500B0784E /* OSImageBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = F55B54131D9A6B6500B0784E /* OSImageBarrage.m */; };
 		F58C736D1D98E7D10009DED9 /* OSEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C736C1D98E7D10009DED9 /* OSEffect.m */; };
 		F58C73751D98EDFF0009DED9 /* Cos2Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F58C73711D98EDFF0009DED9 /* Cos2Shader.vsh */; };
 		F58C73761D98EDFF0009DED9 /* CosShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F58C73721D98EDFF0009DED9 /* CosShader.vsh */; };
@@ -28,7 +30,6 @@
 		F5F5C0A51D965C6D004070D6 /* OSBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F5C0981D965C6D004070D6 /* OSBarrage.m */; };
 		F5F5C0A61D965C6D004070D6 /* OSBarrageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F5C09A1D965C6D004070D6 /* OSBarrageFactory.m */; };
 		F5F5C0A71D965C6D004070D6 /* OSBarrageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F5C09C1D965C6D004070D6 /* OSBarrageInfo.m */; };
-		F5F5C0A81D965C6D004070D6 /* OSImageBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F5C09E1D965C6D004070D6 /* OSImageBarrage.m */; };
 		F5F5C0A91D965C6D004070D6 /* OSShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F5C0A01D965C6D004070D6 /* OSShaderManager.m */; };
 		F5F5C0AA1D965C6D004070D6 /* OSTextBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F5C0A21D965C6D004070D6 /* OSTextBarrage.m */; };
 		F5F5C0AB1D965C6D004070D6 /* UIImage+OSBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F5C0A41D965C6D004070D6 /* UIImage+OSBarrage.m */; };
@@ -38,6 +39,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F50D3F771D9A900C00E12FF1 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		F55B54121D9A6B6500B0784E /* OSImageBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSImageBarrage.h; sourceTree = "<group>"; };
+		F55B54131D9A6B6500B0784E /* OSImageBarrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSImageBarrage.m; sourceTree = "<group>"; };
 		F58C736B1D98E7D10009DED9 /* OSEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSEffect.h; sourceTree = "<group>"; };
 		F58C736C1D98E7D10009DED9 /* OSEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSEffect.m; sourceTree = "<group>"; };
 		F58C73711D98EDFF0009DED9 /* Cos2Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Cos2Shader.vsh; sourceTree = "<group>"; };
@@ -67,8 +71,6 @@
 		F5F5C09A1D965C6D004070D6 /* OSBarrageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSBarrageFactory.m; sourceTree = "<group>"; };
 		F5F5C09B1D965C6D004070D6 /* OSBarrageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSBarrageInfo.h; sourceTree = "<group>"; };
 		F5F5C09C1D965C6D004070D6 /* OSBarrageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSBarrageInfo.m; sourceTree = "<group>"; };
-		F5F5C09D1D965C6D004070D6 /* OSImageBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSImageBarrage.h; sourceTree = "<group>"; };
-		F5F5C09E1D965C6D004070D6 /* OSImageBarrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSImageBarrage.m; sourceTree = "<group>"; };
 		F5F5C09F1D965C6D004070D6 /* OSShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSShaderManager.h; sourceTree = "<group>"; };
 		F5F5C0A01D965C6D004070D6 /* OSShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSShaderManager.m; sourceTree = "<group>"; };
 		F5F5C0A11D965C6D004070D6 /* OSTextBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTextBarrage.h; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		F5F5C0961D965C6D004070D6 /* OSShader */ = {
 			isa = PBXGroup;
 			children = (
+				F50D3F771D9A900C00E12FF1 /* image.png */,
 				F58C73831D9915590009DED9 /* 1.png */,
 				F58C73851D9916420009DED9 /* 2.png */,
 				F5F5C0AF1D965CD4004070D6 /* Shader.fsh */,
@@ -153,22 +156,22 @@
 				F58C737B1D98FA650009DED9 /* Sin2xShader.vsh */,
 				F5F5C0AC1D965CCE004070D6 /* OSDisplayerController.h */,
 				F5F5C0AD1D965CCE004070D6 /* OSDisplayerController.m */,
-				F5F5C0971D965C6D004070D6 /* OSBarrage.h */,
-				F5F5C0981D965C6D004070D6 /* OSBarrage.m */,
 				F5F5C0991D965C6D004070D6 /* OSBarrageFactory.h */,
 				F5F5C09A1D965C6D004070D6 /* OSBarrageFactory.m */,
-				F5F5C09B1D965C6D004070D6 /* OSBarrageInfo.h */,
-				F5F5C09C1D965C6D004070D6 /* OSBarrageInfo.m */,
-				F5F5C09D1D965C6D004070D6 /* OSImageBarrage.h */,
-				F5F5C09E1D965C6D004070D6 /* OSImageBarrage.m */,
 				F5F5C09F1D965C6D004070D6 /* OSShaderManager.h */,
 				F5F5C0A01D965C6D004070D6 /* OSShaderManager.m */,
-				F5F5C0A11D965C6D004070D6 /* OSTextBarrage.h */,
-				F5F5C0A21D965C6D004070D6 /* OSTextBarrage.m */,
 				F5F5C0A31D965C6D004070D6 /* UIImage+OSBarrage.h */,
 				F5F5C0A41D965C6D004070D6 /* UIImage+OSBarrage.m */,
 				F58C736B1D98E7D10009DED9 /* OSEffect.h */,
 				F58C736C1D98E7D10009DED9 /* OSEffect.m */,
+				F5F5C0981D965C6D004070D6 /* OSBarrage.m */,
+				F5F5C0971D965C6D004070D6 /* OSBarrage.h */,
+				F5F5C0A11D965C6D004070D6 /* OSTextBarrage.h */,
+				F5F5C0A21D965C6D004070D6 /* OSTextBarrage.m */,
+				F55B54121D9A6B6500B0784E /* OSImageBarrage.h */,
+				F55B54131D9A6B6500B0784E /* OSImageBarrage.m */,
+				F5F5C09B1D965C6D004070D6 /* OSBarrageInfo.h */,
+				F5F5C09C1D965C6D004070D6 /* OSBarrageInfo.m */,
 			);
 			path = OSShader;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				F58C737E1D98FB330009DED9 /* SinCon2XShader.vsh in Resources */,
 				F5F5C08A1D965C56004070D6 /* Main.storyboard in Resources */,
 				F5F5C0B21D965CD4004070D6 /* Shader.vsh in Resources */,
+				F50D3F781D9A900C00E12FF1 /* image.png in Resources */,
 				F58C73751D98EDFF0009DED9 /* Cos2Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F55B54141D9A6B6500B0784E /* OSImageBarrage.m in Sources */,
 				F5F5C0A91D965C6D004070D6 /* OSShaderManager.m in Sources */,
 				F5F5C0AA1D965C6D004070D6 /* OSTextBarrage.m in Sources */,
 				F5F5C0AE1D965CCE004070D6 /* OSDisplayerController.m in Sources */,
@@ -268,7 +273,6 @@
 				F5F5C0841D965C56004070D6 /* AppDelegate.m in Sources */,
 				F5F5C0A71D965C6D004070D6 /* OSBarrageInfo.m in Sources */,
 				F5F5C0811D965C56004070D6 /* main.m in Sources */,
-				F5F5C0A81D965C6D004070D6 /* OSImageBarrage.m in Sources */,
 				F58C736D1D98E7D10009DED9 /* OSEffect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

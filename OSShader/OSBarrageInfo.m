@@ -43,6 +43,20 @@ static GLuint vertexBuffer;
     OSTextBarrage *textBarrage = [OSTextBarrage textInfoWithString:string font:font color:textColor];
     OSBarrageInfo *barrageInfo = [[OSBarrageInfo alloc]init];
     barrageInfo.barrage = textBarrage;
+     barrageInfo.rate = 1;
+    return barrageInfo;
+}
+
+//-----------------------------------------------------------
+#pragma mark -
+#pragma mark - 创建图片弹幕
+//-----------------------------------------------------------
+
++ (OSBarrageInfo*)barrageInfoWithImage:(UIImage*)image DisplaySize:(CGSize)size{
+    OSImageBarrage *imageBarrage = [OSImageBarrage imageBarrageWithImage:image displaySize:size];
+    OSBarrageInfo *barrageInfo = [[OSBarrageInfo alloc]init];
+    barrageInfo.barrage = imageBarrage;
+    barrageInfo.rate = 1;
     return barrageInfo;
 }
 
@@ -140,6 +154,7 @@ static GLuint vertexBuffer;
             _textureBuffer = 0;
           
         }
+    
 
 }
 

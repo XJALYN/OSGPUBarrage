@@ -16,6 +16,7 @@
 #import <Foundation/Foundation.h>
 #import "OSBarrage.h"
 #import "OSTextBarrage.h"
+#import "OSImageBarrage.h"
 
 @protocol OSGPUDraw<NSObject>
 /*
@@ -77,9 +78,24 @@ typedef enum : NSUInteger {
                             barrageType:(OSBarrageType)type
                                 barrage:(OSBarrage*)barrage;
 
+/*
+ * @func  创建文字弹幕
+ * @param string 字符串
+ * @param font 字体设置
+ * @param textColor 字体颜色
+ * @return 弹幕信息对象
+ */
 + (OSBarrageInfo*)barrageInfoWithString:(NSString*)string
                                    font:(UIFont *)font
                                   color:(UIColor *)textColor;
+
+/*
+ * @func  创建图片弹幕
+ * @param image 图片
+ * @param 图片大小
+ * @return 弹幕信息对象
+ */
++ (OSBarrageInfo*)barrageInfoWithImage:(UIImage*)image DisplaySize:(CGSize)size;
 
 
 
