@@ -13,7 +13,6 @@ static GLubyte indices[4] = {
 static GLuint textureBuffer;
 static GLuint vertexBuffer;
 @interface OSBarrageInfo()
-@property(nonatomic,assign)GLuint vertexBuffer; // 顶点内存buffer
 @property(nonatomic,assign)GLuint textureBuffer; // 纹理缓冲区
 @property(nonatomic,assign)GLuint vertexArrayBuffer;
 
@@ -96,15 +95,18 @@ static GLuint vertexBuffer;
     
     if (!_textureBuffer){
       
- 
+      
+       
+        // 绑定顶点坐标
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-        glVertexAttribPointer(GLKVertexAttribPosition , 3, GL_FLOAT, NO, sizeof(GLfloat)*3, self.barrage. vertexArray);
-
         glEnableVertexAttribArray(GLKVertexAttribPosition);
-
+        glVertexAttribPointer(GLKVertexAttribPosition , 3, GL_FLOAT, NO, sizeof(GLfloat)*3, self.barrage. vertexArray);
+        
+      
+        
         
         // 加载纹理
-        glActiveTexture(GL_ACTIVE_TEXTURE);
+        glActiveTexture(GL_TEXTURE0);
         // 给着色器指定纹理内存区域
         glGenTextures(1, &(_textureBuffer));
         glBindTexture(GL_TEXTURE_2D, textureBuffer);
@@ -124,16 +126,13 @@ static GLuint vertexBuffer;
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
         glVertexAttribPointer(GLKVertexAttribPosition , 3, GL_FLOAT, NO, sizeof(GLfloat)*3, self.barrage.vertexArray);
         glEnableVertexAttribArray(GLKVertexAttribPosition);
-
-        glActiveTexture(GL_ACTIVE_TEXTURE);
-        glBindTexture(GL_TEXTURE_2D, _textureBuffer);
-      
-
         
+       
+        //glActiveTexture(GL_ACTIVE_TEXTURE);
+        glBindTexture(GL_TEXTURE_2D, _textureBuffer);
+ 
     }
 
-    
-    
 }
 
 //-----------------------------------------------------------
@@ -144,11 +143,7 @@ static GLuint vertexBuffer;
     static  int i = 0;
     i++;
     NSLog(@"%d",i);
-        if (self.vertexBuffer){
-            glDeleteBuffers(1, &(_vertexBuffer));
-            self.vertexBuffer = 0;
-
-        }
+    glDeleteVertexArraysOES(1, &_vertexArrayBuffer);
         if(self.textureBuffer){
             glDeleteTextures(1, &_textureBuffer);
             _textureBuffer = 0;
@@ -165,7 +160,7 @@ static GLuint vertexBuffer;
 -(void)drawToGPU{
     [self loadVertexAndTextureToGPU];
     glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, indices);
-    
+   
 }
 
 //-----------------------------------------------------------

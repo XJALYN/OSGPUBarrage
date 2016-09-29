@@ -11,11 +11,19 @@
 
 @implementation OSImageBarrage
 
+//-----------------------------------------------------------
+#pragma mark -
+#pragma mark - 工厂方法创建图片弹幕
+//-----------------------------------------------------------
 +(OSImageBarrage*)imageBarrageWithImage:(UIImage*)image displaySize:(CGSize)size{
     return [[OSImageBarrage alloc]initWithImage:image displaySize:size];
 
 }
 
+//-----------------------------------------------------------
+#pragma mark -
+#pragma mark - 初始化弹幕
+//-----------------------------------------------------------
 -(instancetype)initWithImage:(UIImage*)image displaySize:(CGSize)size{
     if (self = [super init]){
         UIGraphicsBeginImageContext(size);

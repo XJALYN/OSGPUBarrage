@@ -31,7 +31,7 @@
    // self.displayVC.maxBarrageHeight = 100;
     
     // 3.初始化弹幕工厂
-    [self.displayVC setupBarrageFactoryWithEffectType:OSEffectYX];
+    [self.displayVC setupBarrageFactoryWithEffectType:OSEffectNo];
     
     // 4.设置缓存弹幕的数量
     self.displayVC.maxCachaBarrage = 500;
@@ -39,7 +39,7 @@
     // 5.开启碰撞检测
     //self.displayVC.collisionEnable = true;
     
-    [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(generateText:) userInfo:nil repeats:true];
+    [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(generateText:) userInfo:nil repeats:true];
     
     
     
@@ -63,12 +63,12 @@
         if (i%2 == 0){
             // 创建文字弹幕
             OSBarrageInfo *textBarrage = [OSBarrageInfo barrageInfoWithString:@"弹幕" font:[UIFont systemFontOfSize:30] color:color];
-            textBarrage.rate = arc4random_uniform(5)+1;
+            textBarrage.rate = arc4random_uniform(10)+1;
              [self.self.displayVC addBarrageInfo:textBarrage];
         }else{
             // 创建图片弹幕
             OSBarrageInfo *imageBarrage = [OSBarrageInfo barrageInfoWithImage:[UIImage imageNamed:@"image.png"] DisplaySize:CGSizeMake(30, 30)];
-            imageBarrage.rate = arc4random_uniform(5)+1;
+            imageBarrage.rate = arc4random_uniform(10)+1;
             [self.self.displayVC addBarrageInfo:imageBarrage];
         }
        
