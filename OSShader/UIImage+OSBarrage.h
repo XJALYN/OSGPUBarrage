@@ -24,5 +24,13 @@
  * @func  获取图片RGBA 字节流
  * @return 字节流
  */
--(void*)getRGBABuffer;
+-(void*)os_getRGBABuffer;
+
+/*
+ * @func  获取指定尺寸大小的图片
+ * @param size 图片大小
+ * @return 调整后的图片
+ */
+
+-(UIImage*)os_getImageBySize:(CGSize)size;
 @end

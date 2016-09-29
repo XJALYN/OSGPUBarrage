@@ -24,8 +24,8 @@
     colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);// 创建颜色空间为RGB 类型
     
     bitmapData = (GLubyte*)calloc(bitmapByteCount, sizeof(GLubyte));// malloc( bitmapByteCount );// 申请内存空间
-    bitmapData = malloc(bitmapByteCount);
-    memset(bitmapData, 0,bitmapByteCount);
+ 
+
     if (bitmapData == NULL)
     {
         fprintf (stderr, "Memory not allocated!");
@@ -55,6 +55,7 @@
     
     //UIGraphicsBeginImageContextWithOptions(CGSizeMake(size.width, size.height),NO,0.0);
     UIGraphicsBeginImageContext(CGSizeMake(size.width, size.height));
+  
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGFloat color[4] = {0,0,0,0};
     CGContextSetFillColor(context, color);
@@ -62,22 +63,35 @@
     
     [string drawInRect:CGRectMake(0, 0, size.width, size.height) withAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:textColor}];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    
     UIGraphicsEndImageContext();
+   
+    
     return image;
 }
 
--(void*)getRGBABuffer{
+-(void*)os_getRGBABuffer{
     // 创建bitmap上下文
     CGContextRef  myBitmapContext = [self createBitmapContext:self.size.width pixelsHigh:self.size.height];
+   // CGContextRef myBitmapContext = UIGraphicsGetCurrentContext();
     if (myBitmapContext){
         // 绘制图片
         CGContextDrawImage(myBitmapContext, CGRectMake(0, 0, self.size.width, self.size.height), self.CGImage);
         // 获取位图数据
         char *bitmapData = CGBitmapContextGetData(myBitmapContext);
+        
         // 释放掉上下文
         CGContextRelease (myBitmapContext);// 8
         return bitmapData;
     }
     return nil;
+}
+
+-(UIImage*)os_getImageBySize:(CGSize)size{
+    UIGraphicsBeginImageContext(size);
+    [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return  image;
 }
 @end

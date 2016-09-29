@@ -7,7 +7,7 @@
 //
 
 #import "OSTextBarrage.h"
-#import "UIImage+OSBarrage.h"
+
 
 @implementation OSTextBarrage
 
@@ -26,10 +26,9 @@
 -(instancetype)initWithString:(NSString *)string font:(UIFont *)font color:(UIColor *)textColor {
     if (self = [super init]){
         self.image = [UIImage imageWithString:string font:font color:textColor];
-        self.data = [self.image getRGBABuffer];
         self.width = self.image.size.width;
         self.height = self.image.size.height;
-        
+        self.data = [self.image os_getRGBABuffer];
         [self createVerticeArray]; // 必须初始化的，因为我用的是指针的方式
         
         

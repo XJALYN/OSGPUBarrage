@@ -7,7 +7,6 @@
 //
 
 #import "OSImageBarrage.h"
-#import "UIImage+OSBarrage.h"
 
 @implementation OSImageBarrage
 
@@ -26,12 +25,12 @@
 //-----------------------------------------------------------
 -(instancetype)initWithImage:(UIImage*)image displaySize:(CGSize)size{
     if (self = [super init]){
-        UIGraphicsBeginImageContext(size);
-        [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
-        self.image = UIGraphicsGetImageFromCurrentImageContext();
-         self.data = [self.image getRGBABuffer];
+       
+        self.image = [image os_getImageBySize:size];
         self.width = self.image.size.width;
         self.height = self.image.size.height;
+        self.data = [self.image os_getRGBABuffer];
+        
         [self createVerticeArray]; // 初始化顶点数组
         
     }

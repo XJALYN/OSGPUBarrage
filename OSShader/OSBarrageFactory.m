@@ -8,8 +8,7 @@
 
 #import "OSBarrageFactory.h"
 
-#define Take_Barrage_Interval 0.1      // 从缓存中取弹幕的时间间隔 单位:S
-#define Caluate_Barrage_Interval 0.016 // 计算弹幕的位置 单位S:
+#define Take_Barrage_Interval 0.016      // 从缓存中取弹幕的时间间隔 单位:S
 @interface OSBarrageFactory()
 @property(atomic,strong)NSMutableArray *cachaBarrageInfoArray;
 @property(nonatomic,assign)NSUInteger barrageMaxHeight;        // 弹幕最大高度,确定弹道的数量
@@ -64,7 +63,6 @@
 - (void)getBarrageFromCacha:(NSTimer*)timer{
     
     // 从缓冲区中取回弹幕
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         OSBarrageInfo *barrageInfo;
         /*给self.cachaBarrageInfoArray 加锁*/
         @synchronized (self.cachaBarrageInfoArray) {
@@ -88,34 +86,22 @@
                         // 如果弹道中没有弹幕,直接忘里面添加
                         barrageInfo.barrage.position = GLKVector3Make(self.displayViewSize.width, self.barrageMaxHeight*i, 0);
                         [path addObject:barrageInfo];
-                        
-                        @synchronized (self.barrageArray) {
-                            [self.barrageArray addObject:barrageInfo];
-                        }
+                        [self.barrageArray addObject:barrageInfo];
                         @synchronized (self.cachaBarrageInfoArray) {
                             [self.cachaBarrageInfoArray removeObjectAtIndex:0];
                         }
                         break;
-                        
-                        
                     }else{
                         // 如果弹道里面有弹幕,先检测最后一个弹幕是不是在视图外边,如果在外边则不添加
                         OSBarrageInfo *lastBarrageInfo = path.lastObject;
                         if (lastBarrageInfo && lastBarrageInfo .barrage.position.x + lastBarrageInfo .barrage.width < self.displayViewSize.width-10){
                             barrageInfo.barrage.position = GLKVector3Make(self.displayViewSize.width, self.barrageMaxHeight*i, 0);
                             [path addObject:barrageInfo];
-                            
-                            @synchronized (self.barrageArray) {
-                                [self.barrageArray addObject:barrageInfo];
-                            }
-                            
+                            [self.barrageArray addObject:barrageInfo];
                             @synchronized (self.cachaBarrageInfoArray) {
                                 [self.cachaBarrageInfoArray  removeObjectAtIndex:0];
                             }
-                            
-                            
                             break;
-                            
                         }
                     }
                     i++;
@@ -123,15 +109,6 @@
                     
                 }
             }
-     
-        /*barrageInfo-End*/
-        /*给self.barragePathArray - 加锁*/
-        
-        
-    });
-    
-    
-    
 }
 
 //-----------------------------------------------------------
@@ -143,57 +120,46 @@
 
     // 创建一个队列
    
-    dispatch_queue_t queue1 = dispatch_get_global_queue(0, 0);  
-    NSMutableArray *deleteBarrage = [NSMutableArray array];
-    dispatch_apply(self.barragePathArray.count, queue1, ^(size_t i) {
-        // 获取弹道
-        NSMutableArray *path = self.barragePathArray[i];
-        NSInteger index = 0;
-        @synchronized (path) {
-        for (OSBarrageInfo *barrageInfo in path){
-            // 开启碰撞检测 获取上一个弹幕,如果距离小于5，则后一个弹幕的速度和前一个相同
-            if (self.collisionEnable){
-                if (index  >0){
-                    OSBarrageInfo *lastBarrageInfo = path[index-1];
-                    if (lastBarrageInfo && barrageInfo && lastBarrageInfo.barrage.position.x + lastBarrageInfo.barrage.width > barrageInfo.barrage.position.x - 10){
-                        barrageInfo.rate = lastBarrageInfo.rate;
+        NSMutableArray *deleteBarrage = [NSMutableArray array];
+        for  (NSMutableArray *path in self.barragePathArray){
+            // 获取弹道
+            NSInteger index = 0;
+            @synchronized (path) {
+                for (OSBarrageInfo *barrageInfo in path){
+                    // 开启碰撞检测 获取上一个弹幕,如果距离小于5，则后一个弹幕的速度和前一个相同
+                    if (self.collisionEnable){
+                        if (index  >0){
+                            OSBarrageInfo *lastBarrageInfo = path[index-1];
+                            if (lastBarrageInfo && barrageInfo && lastBarrageInfo.barrage.position.x + lastBarrageInfo.barrage.width > barrageInfo.barrage.position.x - 10){
+                                barrageInfo.rate = lastBarrageInfo.rate;
+                            }
+                        }
                     }
+                    
+                    
+                    // 根据弹幕的不同速度,设置其偏移量
+                    barrageInfo.barrage.position = GLKVector3Make(barrageInfo.barrage.position.x-barrageInfo.rate, barrageInfo.barrage.position.y, 0.5-index/10000.0);
+                    
+                    
+                    // 将移除屏幕的弹幕移除掉
+                    if ( barrageInfo && barrageInfo.barrage.position.x + barrageInfo.barrage.width < 0 ){
+                        if (barrageInfo.canDelete){
+                            [deleteBarrage addObject:barrageInfo];
+                        }
+                        barrageInfo.isDelete = true;
+                    }
+                    index++;
+                    
                 }
-            }
-            
-            
-            // 根据弹幕的不同速度,设置其偏移量
-            
-                barrageInfo.barrage.position = GLKVector3Make(barrageInfo.barrage.position.x-barrageInfo.rate, barrageInfo.barrage.position.y, 0.5-index/10000.0);
-   
-            
-            // 将移除屏幕的弹幕移除掉
-            if ( barrageInfo && barrageInfo.barrage.position.x + barrageInfo.barrage.width < 0 ){
                
-                    if (barrageInfo.canDelete){
-                        [deleteBarrage addObject:barrageInfo];
-                    }
-                    barrageInfo.isDelete = true;
+                    [self.barrageArray removeObjectsInArray:deleteBarrage];
+                    [path removeObjectsInArray:deleteBarrage];
+              
             }
-            
-            index++;
-
         }
-        @synchronized (self.barrageArray) {
-            [self.barrageArray removeObjectsInArray:deleteBarrage];
-               [path removeObjectsInArray:deleteBarrage];
 
-        }
-        }
-        
-       
-
-        
-        
-    });
-   
+  
     
-
     
 }
 
@@ -234,7 +200,6 @@
 //-----------------------------------------------------------
 -(instancetype)initWithBarrageMaxHeight:(NSUInteger)barrageMaxHeight DisplayViewSize:(CGSize)viewSize{
     if (self = [super init]){
-        
         // 创建弹道
         _barrageMaxHeight = barrageMaxHeight;
         _displayViewSize = viewSize;
@@ -246,10 +211,10 @@
         
         // 创建弹幕路径
         [self createBarragePaths];
-        self.timer1 = [NSTimer scheduledTimerWithTimeInterval:0.016 target:self selector:@selector(getBarrageFromCacha:) userInfo:nil repeats:true];
-        //self.timer2 = [NSTimer scheduledTimerWithTimeInterval:0.016 target:self selector:@selector(caluateBarragePosition:) userInfo:nil repeats:true];
+        self.timer1 = [NSTimer scheduledTimerWithTimeInterval:Take_Barrage_Interval target:self selector:@selector(getBarrageFromCacha:) userInfo:nil repeats:true];
+        //
         self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(caluateBarragePosition:)];
-        [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+        [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
         
         
     }

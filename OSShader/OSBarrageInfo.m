@@ -40,7 +40,7 @@ static GLuint vertexBuffer;
 
 +(OSBarrageInfo *)barrageInfoWithString:(NSString *)string font:(UIFont *)font color:(UIColor *)textColor{
     OSTextBarrage *textBarrage = [OSTextBarrage textInfoWithString:string font:font color:textColor];
-    OSBarrageInfo *barrageInfo = [[OSBarrageInfo alloc]init];
+    OSBarrageInfo *barrageInfo = [[OSBarrageInfo alloc]initWithBarrageType:OSBarrageText];
     barrageInfo.barrage = textBarrage;
      barrageInfo.rate = 1;
     return barrageInfo;
@@ -53,16 +53,39 @@ static GLuint vertexBuffer;
 
 + (OSBarrageInfo*)barrageInfoWithImage:(UIImage*)image DisplaySize:(CGSize)size{
     OSImageBarrage *imageBarrage = [OSImageBarrage imageBarrageWithImage:image displaySize:size];
-    OSBarrageInfo *barrageInfo = [[OSBarrageInfo alloc]init];
+    OSBarrageInfo *barrageInfo = [[OSBarrageInfo alloc]initWithBarrageType:OSBarrageImage];
     barrageInfo.barrage = imageBarrage;
     barrageInfo.rate = 1;
     return barrageInfo;
 }
 
+
+//-----------------------------------------------------------
+#pragma mark -
+#pragma mark - 创建gif动画弹幕
+//-----------------------------------------------------------
++(OSBarrageInfo *)barrageInfoGif:(NSArray<UIImage *> *)images DisplaySize:(CGSize)size AnimationDuration:(NSTimeInterval)duration{
+    OSGIFBarrage *gifBarrage = [OSGIFBarrage gifBarrageWithImages:images displaySize:size AnimationDuration:duration];
+    OSBarrageInfo *barrageInfo = [[OSBarrageInfo alloc]initWithBarrageType:OSBarrageGif];
+    barrageInfo.barrage = gifBarrage;
+    barrageInfo.rate = 1;
+   
+    return barrageInfo;
+}
+
+
+
 //-----------------------------------------------------------
 #pragma mark -
 #pragma mark - 初始化方法
 //-----------------------------------------------------------
+
+-(instancetype)initWithBarrageType:(OSBarrageType)type{
+    if(self = [super init]){
+        _type = type;
+    }
+    return self;
+}
 -(instancetype)initWithUserID:(NSString*)uid
                      userRank:(OSRank)rank
                     timeStamp:(NSTimeInterval)timeStamp
@@ -93,18 +116,14 @@ static GLuint vertexBuffer;
     }
     
     
-    if (!_textureBuffer){
-      
+    if (!_textureBuffer ){
       
        
         // 绑定顶点坐标
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
         glEnableVertexAttribArray(GLKVertexAttribPosition);
         glVertexAttribPointer(GLKVertexAttribPosition , 3, GL_FLOAT, NO, sizeof(GLfloat)*3, self.barrage. vertexArray);
-        
-      
-        
-        
+
         // 加载纹理
         glActiveTexture(GL_TEXTURE0);
         // 给着色器指定纹理内存区域
@@ -130,6 +149,13 @@ static GLuint vertexBuffer;
        
         //glActiveTexture(GL_ACTIVE_TEXTURE);
         glBindTexture(GL_TEXTURE_2D, _textureBuffer);
+        if (self.type == OSBarrageGif){
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,  self.barrage.width, self.barrage.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, self.barrage.data);
+        }
  
     }
 
@@ -143,7 +169,7 @@ static GLuint vertexBuffer;
     static  int i = 0;
     i++;
     NSLog(@"%d",i);
-    glDeleteVertexArraysOES(1, &_vertexArrayBuffer);
+   
         if(self.textureBuffer){
             glDeleteTextures(1, &_textureBuffer);
             _textureBuffer = 0;

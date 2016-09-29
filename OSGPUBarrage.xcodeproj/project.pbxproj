@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		F50D3F781D9A900C00E12FF1 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = F50D3F771D9A900C00E12FF1 /* image.png */; };
+		F516188F1D9CD8F2008C1989 /* FadeOutShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F516188E1D9CD8F2008C1989 /* FadeOutShader.fsh */; };
+		F51618911D9CD91F008C1989 /* FadeInShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F51618901D9CD91F008C1989 /* FadeInShader.fsh */; };
+		F51618931D9CD93A008C1989 /* FadeInOutShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F51618921D9CD93A008C1989 /* FadeInOutShader.fsh */; };
+		F51618961D9CDC02008C1989 /* OSGIFBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = F51618951D9CDC02008C1989 /* OSGIFBarrage.m */; };
+		F516189B1D9CF71D008C1989 /* 飙泪_1.png in Resources */ = {isa = PBXBuildFile; fileRef = F51618981D9CF71D008C1989 /* 飙泪_1.png */; };
+		F516189C1D9CF71D008C1989 /* 飙泪_2.png in Resources */ = {isa = PBXBuildFile; fileRef = F51618991D9CF71D008C1989 /* 飙泪_2.png */; };
+		F516189D1D9CF71D008C1989 /* 飙泪_3.png in Resources */ = {isa = PBXBuildFile; fileRef = F516189A1D9CF71D008C1989 /* 飙泪_3.png */; };
 		F55B54141D9A6B6500B0784E /* OSImageBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = F55B54131D9A6B6500B0784E /* OSImageBarrage.m */; };
 		F58C736D1D98E7D10009DED9 /* OSEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C736C1D98E7D10009DED9 /* OSEffect.m */; };
 		F58C73751D98EDFF0009DED9 /* Cos2Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F58C73711D98EDFF0009DED9 /* Cos2Shader.vsh */; };
@@ -40,6 +47,14 @@
 
 /* Begin PBXFileReference section */
 		F50D3F771D9A900C00E12FF1 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		F516188E1D9CD8F2008C1989 /* FadeOutShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FadeOutShader.fsh; sourceTree = "<group>"; };
+		F51618901D9CD91F008C1989 /* FadeInShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FadeInShader.fsh; sourceTree = "<group>"; };
+		F51618921D9CD93A008C1989 /* FadeInOutShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FadeInOutShader.fsh; sourceTree = "<group>"; };
+		F51618941D9CDC02008C1989 /* OSGIFBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSGIFBarrage.h; sourceTree = "<group>"; };
+		F51618951D9CDC02008C1989 /* OSGIFBarrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSGIFBarrage.m; sourceTree = "<group>"; };
+		F51618981D9CF71D008C1989 /* 飙泪_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "飙泪_1.png"; sourceTree = "<group>"; };
+		F51618991D9CF71D008C1989 /* 飙泪_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "飙泪_2.png"; sourceTree = "<group>"; };
+		F516189A1D9CF71D008C1989 /* 飙泪_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "飙泪_3.png"; sourceTree = "<group>"; };
 		F55B54121D9A6B6500B0784E /* OSImageBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSImageBarrage.h; sourceTree = "<group>"; };
 		F55B54131D9A6B6500B0784E /* OSImageBarrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSImageBarrage.m; sourceTree = "<group>"; };
 		F58C736B1D98E7D10009DED9 /* OSEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSEffect.h; sourceTree = "<group>"; };
@@ -95,6 +110,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F51618971D9CF71D008C1989 /* 飙泪 */ = {
+			isa = PBXGroup;
+			children = (
+				F51618981D9CF71D008C1989 /* 飙泪_1.png */,
+				F51618991D9CF71D008C1989 /* 飙泪_2.png */,
+				F516189A1D9CF71D008C1989 /* 飙泪_3.png */,
+			);
+			path = "飙泪";
+			sourceTree = "<group>";
+		};
 		F5F5C0731D965C56004070D6 = {
 			isa = PBXGroup;
 			children = (
@@ -140,10 +165,14 @@
 		F5F5C0961D965C6D004070D6 /* OSShader */ = {
 			isa = PBXGroup;
 			children = (
+				F51618971D9CF71D008C1989 /* 飙泪 */,
 				F50D3F771D9A900C00E12FF1 /* image.png */,
 				F58C73831D9915590009DED9 /* 1.png */,
 				F58C73851D9916420009DED9 /* 2.png */,
 				F5F5C0AF1D965CD4004070D6 /* Shader.fsh */,
+				F516188E1D9CD8F2008C1989 /* FadeOutShader.fsh */,
+				F51618901D9CD91F008C1989 /* FadeInShader.fsh */,
+				F51618921D9CD93A008C1989 /* FadeInOutShader.fsh */,
 				F5F5C0B01D965CD4004070D6 /* Shader.vsh */,
 				F58C73811D98FCE30009DED9 /* YXShader.vsh */,
 				F58C737F1D98FCB90009DED9 /* XYShader.vsh */,
@@ -164,12 +193,14 @@
 				F5F5C0A41D965C6D004070D6 /* UIImage+OSBarrage.m */,
 				F58C736B1D98E7D10009DED9 /* OSEffect.h */,
 				F58C736C1D98E7D10009DED9 /* OSEffect.m */,
-				F5F5C0981D965C6D004070D6 /* OSBarrage.m */,
 				F5F5C0971D965C6D004070D6 /* OSBarrage.h */,
+				F5F5C0981D965C6D004070D6 /* OSBarrage.m */,
 				F5F5C0A11D965C6D004070D6 /* OSTextBarrage.h */,
 				F5F5C0A21D965C6D004070D6 /* OSTextBarrage.m */,
 				F55B54121D9A6B6500B0784E /* OSImageBarrage.h */,
 				F55B54131D9A6B6500B0784E /* OSImageBarrage.m */,
+				F51618941D9CDC02008C1989 /* OSGIFBarrage.h */,
+				F51618951D9CDC02008C1989 /* OSGIFBarrage.m */,
 				F5F5C09B1D965C6D004070D6 /* OSBarrageInfo.h */,
 				F5F5C09C1D965C6D004070D6 /* OSBarrageInfo.m */,
 			);
@@ -238,18 +269,24 @@
 				F58C73801D98FCB90009DED9 /* XYShader.vsh in Resources */,
 				F58C73771D98EDFF0009DED9 /* Sin2Shader.vsh in Resources */,
 				F5F5C0B11D965CD4004070D6 /* Shader.fsh in Resources */,
+				F516189C1D9CF71D008C1989 /* 飙泪_2.png in Resources */,
 				F5F5C08F1D965C56004070D6 /* LaunchScreen.storyboard in Resources */,
 				F58C73761D98EDFF0009DED9 /* CosShader.vsh in Resources */,
 				F58C737A1D98F9FA0009DED9 /* SinCosXShader.vsh in Resources */,
 				F58C73781D98EDFF0009DED9 /* SinShader.vsh in Resources */,
+				F516189D1D9CF71D008C1989 /* 飙泪_3.png in Resources */,
 				F58C73821D98FCE30009DED9 /* YXShader.vsh in Resources */,
+				F51618931D9CD93A008C1989 /* FadeInOutShader.fsh in Resources */,
 				F5F5C08C1D965C56004070D6 /* Assets.xcassets in Resources */,
+				F51618911D9CD91F008C1989 /* FadeInShader.fsh in Resources */,
 				F58C73841D9915590009DED9 /* 1.png in Resources */,
 				F58C73861D9916420009DED9 /* 2.png in Resources */,
 				F58C737C1D98FA650009DED9 /* Sin2xShader.vsh in Resources */,
 				F58C737E1D98FB330009DED9 /* SinCon2XShader.vsh in Resources */,
+				F516188F1D9CD8F2008C1989 /* FadeOutShader.fsh in Resources */,
 				F5F5C08A1D965C56004070D6 /* Main.storyboard in Resources */,
 				F5F5C0B21D965CD4004070D6 /* Shader.vsh in Resources */,
+				F516189B1D9CF71D008C1989 /* 飙泪_1.png in Resources */,
 				F50D3F781D9A900C00E12FF1 /* image.png in Resources */,
 				F58C73751D98EDFF0009DED9 /* Cos2Shader.vsh in Resources */,
 			);
@@ -266,6 +303,7 @@
 				F5F5C0A91D965C6D004070D6 /* OSShaderManager.m in Sources */,
 				F5F5C0AA1D965C6D004070D6 /* OSTextBarrage.m in Sources */,
 				F5F5C0AE1D965CCE004070D6 /* OSDisplayerController.m in Sources */,
+				F51618961D9CDC02008C1989 /* OSGIFBarrage.m in Sources */,
 				F5F5C0A51D965C6D004070D6 /* OSBarrage.m in Sources */,
 				F5F5C0A61D965C6D004070D6 /* OSBarrageFactory.m in Sources */,
 				F5F5C0AB1D965C6D004070D6 /* UIImage+OSBarrage.m in Sources */,

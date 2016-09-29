@@ -9,14 +9,15 @@ precision mediump float;//mediump
 attribute vec4 position;
 attribute vec2 texCoord0;
 varying  vec2 texCoordVarying;
+varying  vec4 positionVarying;
 
 
 
 void main()
 {
     
-//    float y = position.y + 0.1*sin(position.x);
     texCoordVarying = texCoord0;
+    positionVarying = position;
     gl_Position = vec4(position.x,position.y,position.z,1);
 }
 

@@ -34,12 +34,12 @@
     [self.displayVC setupBarrageFactoryWithEffectType:OSEffectNo];
     
     // 4.设置缓存弹幕的数量
-    self.displayVC.maxCachaBarrage = 500;
+    self.displayVC.maxCachaBarrage = 50;
     
     // 5.开启碰撞检测
-    //self.displayVC.collisionEnable = true;
+   // self.displayVC.collisionEnable = true;
     
-    [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(generateText:) userInfo:nil repeats:true];
+    [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(generateText:) userInfo:nil repeats:true];
     
     
     
@@ -63,18 +63,24 @@
         if (i%2 == 0){
             // 创建文字弹幕
             OSBarrageInfo *textBarrage = [OSBarrageInfo barrageInfoWithString:@"弹幕" font:[UIFont systemFontOfSize:30] color:color];
-            textBarrage.rate = arc4random_uniform(10)+1;
+            textBarrage.rate = arc4random_uniform(5)+1;
              [self.self.displayVC addBarrageInfo:textBarrage];
+        }else if (i%3 ==1){
+             //创建图片弹幕
+            OSBarrageInfo *imageBarrage = [OSBarrageInfo barrageInfoWithImage:[UIImage imageNamed:@"image.png"] DisplaySize:CGSizeMake(40, 40)];
+            imageBarrage.rate = arc4random_uniform(5)+1;
+            [self.displayVC addBarrageInfo:imageBarrage];
         }else{
-            // 创建图片弹幕
-            OSBarrageInfo *imageBarrage = [OSBarrageInfo barrageInfoWithImage:[UIImage imageNamed:@"image.png"] DisplaySize:CGSizeMake(30, 30)];
-            imageBarrage.rate = arc4random_uniform(10)+1;
-            [self.self.displayVC addBarrageInfo:imageBarrage];
+            OSBarrageInfo *gifBarrage = [OSBarrageInfo barrageInfoGif:@[[UIImage imageNamed:@"飙泪_1.png"],[UIImage imageNamed:@"飙泪_2.png"],[UIImage imageNamed:@"飙泪_2.png"]] DisplaySize:CGSizeMake(50, 50) AnimationDuration:0.3];
+            gifBarrage.rate = arc4random_uniform(5)+1;
+            [self.displayVC addBarrageInfo:gifBarrage];
         }
-       
+    
+
+    
+    
         
-        
-    });
+   });
 }
 
 

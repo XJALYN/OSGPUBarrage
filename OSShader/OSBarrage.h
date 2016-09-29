@@ -10,6 +10,7 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 #import <GLKit/GLKit.h>
+#import "UIImage+OSBarrage.h"
 
 @interface OSBarrage : NSObject
 @property(nonatomic,assign)GLfloat *vertexArray;  // 顶点数组
@@ -26,6 +27,7 @@
  * @func  创建顶点数组
  */
 -(void)createVerticeArray;
+
 
 
 @end

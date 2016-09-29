@@ -308,17 +308,16 @@ static const GLfloat coords[8] = {
     // 渲染弹幕
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    @synchronized (self.barrageFactory.barrageArray) {
-        [self.barrageFactory.barrageArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            OSBarrageInfo *barrageInfo = obj;
-            [barrageInfo drawToGPU];
-            if (barrageInfo.isDelete){
-                barrageInfo.canDelete = true;
-                [barrageInfo deleteVertexAndTextureFromGPU];
-            }
-            
-        }];
+  
+    for (OSBarrageInfo *barrageInfo in self.barrageFactory.barrageArray){
+           [barrageInfo drawToGPU];
+        if (barrageInfo.isDelete){
+            barrageInfo.canDelete = true;
+            [barrageInfo deleteVertexAndTextureFromGPU];
+        }
     }
+       
+  
 }
 
 - (BOOL)prefersStatusBarHidden {

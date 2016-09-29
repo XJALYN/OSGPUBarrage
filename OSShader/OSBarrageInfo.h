@@ -17,6 +17,7 @@
 #import "OSBarrage.h"
 #import "OSTextBarrage.h"
 #import "OSImageBarrage.h"
+#import "OSGIFBarrage.h"
 
 @protocol OSGPUDraw<NSObject>
 /*
@@ -38,8 +39,9 @@
 
 // 弹幕类型
 typedef enum : NSUInteger {
-    OSText,
-    OSImage,
+    OSBarrageText,
+    OSBarrageImage,
+    OSBarrageGif,
     
 } OSBarrageType;
 
@@ -95,7 +97,16 @@ typedef enum : NSUInteger {
  * @param 图片大小
  * @return 弹幕信息对象
  */
-+ (OSBarrageInfo*)barrageInfoWithImage:(UIImage*)image DisplaySize:(CGSize)size;
++ (OSBarrageInfo*)barrageInfoWithImage:(UIImage*)image
+                           DisplaySize:(CGSize)size;
+
+/*
+ * @func 创建gif弹幕
+ * @param 创建图片弹幕
+ * @return 弹幕信息对象
+ */
+
++(OSBarrageInfo*)barrageInfoGif:(NSArray<UIImage*>*)images DisplaySize:(CGSize)size AnimationDuration:(NSTimeInterval)duration;
 
 
 

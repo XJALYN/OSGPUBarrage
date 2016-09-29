@@ -17,14 +17,17 @@
 //-----------------------------------------------------------
 -(void)dealloc{
     if(self.vertexArray){
-        free(self.vertexArray);
-        self.vertexArray = 0;
+        free(_vertexArray);
+        _vertexArray = 0;
     }
     if (self.data){
-        free(self.data);
-        self.data = 0;
+        free(_data);
+        _data = 0;
     }
+    self.image = nil;
+    
 }
+
 //-----------------------------------------------------------
 #pragma mark -
 #pragma mark - 创建并且计算顶点数据
@@ -32,8 +35,9 @@
 -(void)createVerticeArray{
     CGFloat maxWidth = self.displayWidth;
     CGFloat maxHeight = self.displayHeight;
-    self.vertexArray = (GLfloat*)(malloc(sizeof(GLfloat)*12));
-    memset(_vertexArray, 0,sizeof(GLfloat)*12);
+    //self.vertexArray = (GLfloat*)(malloc(sizeof(GLfloat)*12));
+   // memset(_vertexArray, 0,sizeof(GLfloat)*12);
+    self.vertexArray = (GLfloat*)calloc(12, sizeof(CGFloat));
     
     *_vertexArray = -1 + _position.x / maxWidth*2;
     *(_vertexArray+1)= 1 - _position.y / maxHeight*2;

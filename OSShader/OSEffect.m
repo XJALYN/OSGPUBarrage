@@ -11,8 +11,8 @@
 @implementation OSEffect
 +(OSEffect*)effectWithType:(OSEffectType)effectType{
     OSEffect *effect = [[OSEffect alloc]init];
-             effect.fragmentShaderName = @"Shader";
-               effect.vertexShaderName = @"Shader";
+    effect.fragmentShaderName = @"Shader";
+    effect.vertexShaderName = @"Shader";
     switch (effectType) {
         case OSEffectSin:
             effect.vertexShaderName = @"SinShader";
@@ -40,6 +40,15 @@
             break;
         case OSEffectSinCon2X:
             effect.vertexShaderName = @"SinCon2XShader";
+            break;
+        case OSEffectFadeIn:
+            effect.fragmentShaderName = @"FadeInShader";
+            break;
+        case OSEffectFadeOut:
+            effect.fragmentShaderName = @"FadeOutShader";
+            break;
+        case OSEffectFadeInOut:
+            effect.fragmentShaderName = @"FadeInOutShader";
             break;
         default:
             break;

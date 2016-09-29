@@ -18,7 +18,10 @@ typedef enum : NSUInteger {
     OSEffectYX,
     OSEffectSin2X,
     OSEffectSinCon2X,
-    OSEffectSinCosX
+    OSEffectSinCosX,
+    OSEffectFadeIn,
+    OSEffectFadeOut,
+    OSEffectFadeInOut
     
     
 } OSEffectType;
