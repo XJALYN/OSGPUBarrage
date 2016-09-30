@@ -77,6 +77,7 @@
         *(_vertexArray+8)= position.z;
         *(_vertexArray+11)= position.z;
     }
+    // TEST
     _position = position;
 }
 -(instancetype)init{
