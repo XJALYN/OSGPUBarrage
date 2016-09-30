@@ -33,7 +33,6 @@
 		F5F5C0871D965C56004070D6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F5C0861D965C56004070D6 /* ViewController.m */; };
 		F5F5C08A1D965C56004070D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5F5C0881D965C56004070D6 /* Main.storyboard */; };
 		F5F5C08C1D965C56004070D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5F5C08B1D965C56004070D6 /* Assets.xcassets */; };
-		F5F5C08F1D965C56004070D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5F5C08D1D965C56004070D6 /* LaunchScreen.storyboard */; };
 		F5F5C0A51D965C6D004070D6 /* OSBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F5C0981D965C6D004070D6 /* OSBarrage.m */; };
 		F5F5C0A61D965C6D004070D6 /* OSBarrageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F5C09A1D965C6D004070D6 /* OSBarrageFactory.m */; };
 		F5F5C0A71D965C6D004070D6 /* OSBarrageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F5C09C1D965C6D004070D6 /* OSBarrageInfo.m */; };
@@ -78,7 +77,6 @@
 		F5F5C0861D965C56004070D6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F5F5C0891D965C56004070D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F5F5C08B1D965C56004070D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F5F5C08E1D965C56004070D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F5F5C0901D965C56004070D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F5F5C0971D965C6D004070D6 /* OSBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSBarrage.h; sourceTree = "<group>"; };
 		F5F5C0981D965C6D004070D6 /* OSBarrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSBarrage.m; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 				F5F5C0861D965C56004070D6 /* ViewController.m */,
 				F5F5C0881D965C56004070D6 /* Main.storyboard */,
 				F5F5C08B1D965C56004070D6 /* Assets.xcassets */,
-				F5F5C08D1D965C56004070D6 /* LaunchScreen.storyboard */,
 				F5F5C0901D965C56004070D6 /* Info.plist */,
 				F5F5C07F1D965C56004070D6 /* Supporting Files */,
 			);
@@ -238,7 +235,6 @@
 				TargetAttributes = {
 					F5F5C07B1D965C56004070D6 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = DWB5MA72P9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -270,7 +266,6 @@
 				F58C73771D98EDFF0009DED9 /* Sin2Shader.vsh in Resources */,
 				F5F5C0B11D965CD4004070D6 /* Shader.fsh in Resources */,
 				F516189C1D9CF71D008C1989 /* 飙泪_2.png in Resources */,
-				F5F5C08F1D965C56004070D6 /* LaunchScreen.storyboard in Resources */,
 				F58C73761D98EDFF0009DED9 /* CosShader.vsh in Resources */,
 				F58C737A1D98F9FA0009DED9 /* SinCosXShader.vsh in Resources */,
 				F58C73781D98EDFF0009DED9 /* SinShader.vsh in Resources */,
@@ -324,14 +319,6 @@
 				F5F5C0891D965C56004070D6 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F5F5C08D1D965C56004070D6 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F5F5C08E1D965C56004070D6 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -429,11 +416,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = DWB5MA72P9;
 				INFOPLIST_FILE = OSGPUBarrage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xujie.OSGPUBarrage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "be18191f-d31f-41a8-845c-31bb49b5a2eb";
 			};
 			name = Debug;
 		};
@@ -441,11 +431,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = DWB5MA72P9;
 				INFOPLIST_FILE = OSGPUBarrage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xujie.OSGPUBarrage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "be18191f-d31f-41a8-845c-31bb49b5a2eb";
 			};
 			name = Release;
 		};

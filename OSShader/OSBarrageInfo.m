@@ -117,8 +117,6 @@ static GLuint vertexBuffer;
     
     
     if (!_textureBuffer ){
-      
-       
         // 绑定顶点坐标
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
         glEnableVertexAttribArray(GLKVertexAttribPosition);
@@ -136,10 +134,6 @@ static GLuint vertexBuffer;
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,  self.barrage.width, self.barrage.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, self.barrage.data);
-       
-       
- 
-        
     }else{
 
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
@@ -156,7 +150,7 @@ static GLuint vertexBuffer;
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,  self.barrage.width, self.barrage.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, self.barrage.data);
+            glTexSubImage2D(GL_TEXTURE_2D, 0, GL_RGBA,  self.barrage.width, self.barrage.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, self.barrage.data);
         }
  
     }

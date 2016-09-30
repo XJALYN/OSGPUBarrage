@@ -48,10 +48,8 @@
 #pragma mark - 创建帧同步定时器
 //-----------------------------------------------------------
 -(void)createDisplayLink{
-    
-   
         self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(animation:)];
-        self.displayLink .preferredFramesPerSecond = (NSInteger)1/self.interval;
+        self.displayLink.frameInterval = (NSInteger)1/self.interval;
         [self.displayLink  addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 
 
