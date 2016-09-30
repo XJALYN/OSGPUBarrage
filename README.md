@@ -14,10 +14,11 @@
 * 1.创建对象添加到界面上去
 
 
-    self.displayVC = [[OSDisplayerController alloc]init];
+    
+    <code>self.displayVC = [[OSDisplayerController alloc]init];
     [self addChildViewController:self.displayVC];
     [self.view addSubview:self.displayVC.view];
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor blackColor];</code>
 
 *  2.设置展示视图的大小,默认为上面self.displayVC的View的大小
 
