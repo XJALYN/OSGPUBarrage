@@ -17,8 +17,11 @@
     
     
     self.displayVC = [[OSDisplayerController alloc]init];
+
     [self addChildViewController:self.displayVC];
+
     [self.view addSubview:self.displayVC.view];
+
     self.view.backgroundColor = [UIColor blackColor];
 
 *  2.设置展示视图的大小,默认为上面self.displayVC的View的大小
@@ -45,15 +48,29 @@
 
 
     OSBarrageInfo *barrageInfo = [OSBarrageInfo barrageInfoWithString:@"我是弹幕" font:[UIFont systemFontOfSize:arc4random_uniform(15)+15] color:color];
+
     barrageInfo.rate = arc4random_uniform(4)+2; // 设置弹幕速度1-5
 
 * 7 创建图片弹幕方法
 
 
     OSBarrageInfo *imageBarrage = [OSBarrageInfo barrageInfoWithImage:[UIImage imageNamed:@"image.png"] DisplaySize:CGSizeMake(30, 30)];
-imageBarrage.rate = arc4random_uniform(5)+1;
 
-* 8.添加弹幕到渲染控制器
+    imageBarrage.rate = arc4random_uniform(5)+1;
+
+* 8. 创建GIF弹幕方法
+
+
+    OSBarrageInfo *gifBarrage = [OSBarrageInfo barrageInfoGif:@[[UIImage imageNamed:@"飙泪_1.png"],[UIImage imageNamed:@"飙泪_2.png"],[UIImage imageNamed:@"飙泪_2.png"]] DisplaySize:CGSizeMake(50, 50) AnimationDuration:0.3];
+    gifBarrage.rate = arc4random_uniform(5)+1;
+
+* 9.添加弹幕到渲染控制器
 
 
     [self.self.displayVC addBarrageInfo:barrageInfo];
+
+#### 展示图
+
+![让学习成为一种习惯](http://upload-images.jianshu.io/upload_images/1594482-8b9d9ad879d02481.gif?imageMogr2/auto-orient/strip)
+
+![只是其中一种](http://upload-images.jianshu.io/upload_images/1594482-35bf4a943fb94b8f.gif?imageMogr2/auto-orient/strip)
