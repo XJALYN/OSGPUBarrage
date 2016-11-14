@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "OSDisplayerController.h"
 #import <SceneKit/SceneKit.h>
+@import GoogleMobileAds;
 
 @interface ViewController ()
 @property(nonatomic,strong)OSDisplayerController *displayVC;
@@ -23,7 +24,7 @@
     
     [self addChildViewController:self.displayVC];
     [self.view addSubview:self.displayVC.view];
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     // 2.设置展示视图的大小,默认为上面self.displayVC的View的大小
     //self.displayVC.disPlayViewSize = CGSizeMake(100, 200);
@@ -41,8 +42,18 @@
     
     [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(generateText:) userInfo:nil repeats:true];
     
+    [self addAdView];
     
-    
+}
+
+-(void)addAdView{
+    GADBannerView *bannerView = [[GADBannerView alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height-50, self.view.bounds.size.width, 50)];
+    [self.view addSubview:bannerView];
+    bannerView.adUnitID = @"ca-app-pub-3629819764559170/3550577647";
+    bannerView.rootViewController = self;
+    bannerView.autoloadEnabled = true;
+    GADRequest *request = [GADRequest request];
+    [ bannerView loadRequest:request];
 }
 
 - (void)didReceiveMemoryWarning {

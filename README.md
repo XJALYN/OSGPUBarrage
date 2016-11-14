@@ -62,6 +62,7 @@
 
 
     OSBarrageInfo *gifBarrage = [OSBarrageInfo barrageInfoGif:@[[UIImage imageNamed:@"飙泪_1.png"],[UIImage imageNamed:@"飙泪_2.png"],[UIImage imageNamed:@"飙泪_2.png"]] DisplaySize:CGSizeMake(50, 50) AnimationDuration:0.3];
+
     gifBarrage.rate = arc4random_uniform(5)+1;
 
 * 9.添加弹幕到渲染控制器

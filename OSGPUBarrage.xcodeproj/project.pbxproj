@@ -15,6 +15,7 @@
 		F516189B1D9CF71D008C1989 /* 飙泪_1.png in Resources */ = {isa = PBXBuildFile; fileRef = F51618981D9CF71D008C1989 /* 飙泪_1.png */; };
 		F516189C1D9CF71D008C1989 /* 飙泪_2.png in Resources */ = {isa = PBXBuildFile; fileRef = F51618991D9CF71D008C1989 /* 飙泪_2.png */; };
 		F516189D1D9CF71D008C1989 /* 飙泪_3.png in Resources */ = {isa = PBXBuildFile; fileRef = F516189A1D9CF71D008C1989 /* 飙泪_3.png */; };
+		F559B9DF1DD950A50083AA51 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F559B9DE1DD950A50083AA51 /* GoogleMobileAds.framework */; };
 		F55B54141D9A6B6500B0784E /* OSImageBarrage.m in Sources */ = {isa = PBXBuildFile; fileRef = F55B54131D9A6B6500B0784E /* OSImageBarrage.m */; };
 		F58C736D1D98E7D10009DED9 /* OSEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C736C1D98E7D10009DED9 /* OSEffect.m */; };
 		F58C73751D98EDFF0009DED9 /* Cos2Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F58C73711D98EDFF0009DED9 /* Cos2Shader.vsh */; };
@@ -54,6 +55,7 @@
 		F51618981D9CF71D008C1989 /* 飙泪_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "飙泪_1.png"; sourceTree = "<group>"; };
 		F51618991D9CF71D008C1989 /* 飙泪_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "飙泪_2.png"; sourceTree = "<group>"; };
 		F516189A1D9CF71D008C1989 /* 飙泪_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "飙泪_3.png"; sourceTree = "<group>"; };
+		F559B9DE1DD950A50083AA51 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		F55B54121D9A6B6500B0784E /* OSImageBarrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSImageBarrage.h; sourceTree = "<group>"; };
 		F55B54131D9A6B6500B0784E /* OSImageBarrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSImageBarrage.m; sourceTree = "<group>"; };
 		F58C736B1D98E7D10009DED9 /* OSEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSEffect.h; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F559B9DF1DD950A50083AA51 /* GoogleMobileAds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				F5F5C0B31D965DE3004070D6 /* README.md */,
+				F559B9DE1DD950A50083AA51 /* GoogleMobileAds.framework */,
 				F5F5C0961D965C6D004070D6 /* OSShader */,
 				F5F5C07E1D965C56004070D6 /* OSGPUBarrage */,
 				F5F5C07D1D965C56004070D6 /* Products */,
@@ -235,6 +239,7 @@
 				TargetAttributes = {
 					F5F5C07B1D965C56004070D6 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = DWB5MA72P9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -418,6 +423,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = DWB5MA72P9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = OSGPUBarrage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -433,6 +442,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = DWB5MA72P9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = OSGPUBarrage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
